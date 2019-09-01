@@ -1,0 +1,2 @@
+1 realme_x 2 60000
+2 glouse 3 2100

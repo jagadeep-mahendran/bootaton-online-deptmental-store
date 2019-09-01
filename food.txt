@@ -1,0 +1,3 @@
+1 samosa 50 35
+2 pannipuri 15 10
+3 chickenfry 35 200

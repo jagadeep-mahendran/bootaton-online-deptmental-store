@@ -1,0 +1,4 @@
+1 hockeybat 50 5000
+2 tennisbat 70 2000
+3 glouse 15 700
+4 pad 10 450

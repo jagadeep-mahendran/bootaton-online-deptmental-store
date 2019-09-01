@@ -77,92 +77,66 @@ void add1()
         scanf("%c",&choice1);
  	}while(choice1=='y' || choice1=='Y');
 }
-void del1()
-{ int q,r,p;
-	int x,y,z,deptchoice,valid,valid1,flag=0;
 
-     char c[100],name[100],choice,choice1,dept[100];
-     do{
-	 printf("***** DELETE ITEMS *****");
-     printf("\n1. Electronics\n2. Sports\n3. Food");
-     printf("\nEnter the Department number : ");
-     scanf("%d",&deptchoice);
-     if(deptchoice==1)
-     strcpy(dept,"electronics.txt");
-     else if(deptchoice==2)
-     strcpy(dept,"sports.txt");
-     else if(deptchoice==3)
-     strcpy(dept,"food.txt");
-     else
-     while(deptchoice!=1 || deptchoice!=2 || deptchoice!=3)
-     {
-     	printf("\nInvalid Input.Please Input again.");
-     	printf("\nEnter the Department number : ");
-     scanf("%d",&deptchoice);
-     printf("\nEnter the Department number : ");
-     scanf("%d",&deptchoice);
-     if(deptchoice==1 || deptchoice==2 || deptchoice==3)
-     break;
-	 }
-     FILE *fh,*fh1; int d=1,n;
-		fh=fopen(dept,"r");
-		fh1=fopen("temp.txt","w");
-     while(fscanf(fh,"%d %s %d %d",&x,c,&y,&z)!=EOF)
-    	printf("\n%d %s %d %d",x,c,y,z);
-    	fclose(fh);
-    	fh=fopen(dept,"r");
-    	do{
-
-       	printf("\n\nEnter the serial no of item to be deleted : ");
-        fflush(stdin);
-        scanf("%d",&r);
-
-        n=getc(fh);
-        while(n!=EOF)
-        {
-            if(d!=r)
-            putc(n,fh1);
-            if(n=='\n')
-                d++;
-            n=getc(fh);
-
-        }
-        fclose(fh);
-    fclose(fh1);
-    remove(dept);
-    rename("temp.txt",dept);
-
-
-   		fh=fopen(dept,"r");
-    	while(fscanf(fh,"%d %s %d %d\n",&x,c,&y,&z)!=EOF)
-    	printf("\n%d %s %d %d",x,c,y,z);
-        fclose(fh);
-
-		printf("\nDo you want to delete another entry? Y/N : ");
-        fflush(stdin);
-       scanf("%c",&choice);
-        if(choice=='y' || choice=='Y' || choice=='n' || choice=='N')
-        flag=1;
-       	if((choice!='y' || choice!='Y') || (choice!='n' || choice!='N'))
-		   {
-		   while(flag!=1)
-       	{ fflush(stdin);
-       		printf("\nInvalid Input.Please Input again");
-       		printf("\nDo you want to add another entry? Y/N : ");
-        fflush(stdin);
-        scanf("%c",&choice);
-        if(choice=='y' || choice=='Y' || choice=='n' || choice=='N')
-        {break;flag=1;
-		}
-		   }
-		}
- 		   }while(choice=='Y' || choice=='y');
- 	
-		 printf("\nDo you want to add items to any other Department? Y/N : ");   
- 		 fflush(stdin);
-        scanf("%c",&choice1);
- 	}while(choice1=='y' || choice1=='Y');
+void del1(){
+       int d,b,c,sln,sl=0,d1,b1,c1,ch,op1,op2;
+       char a[20],a1[20],fname[20];
+       FILE *fp1,*fp2;
+  do{
+        printf("\nChoose the catagory to delete item\n\t1.Electronics\n\t2.sports\n\t3.Eatables");
+        scanf("%d",&ch);
+        switch(ch){
+          case 1:strcpy(fname,"electronics.txt");
+          	break;
+          case 2:strcpy(fname,"sports.txt");
+          	break;
+          case 3:strcpy(fname,"food.txt");
+          	break;
+           default:printf("INVALID input:");
+               }
+       
+        do{
+        fp1=fopen(fname,"r");
+       
+             while(fscanf(fp1,"\n%d %s %d %d",&d,a,&b,&c)!=EOF){
+                   printf("%d %s %d %d\n",d,a,b,c);
+                   }
+             fclose(fp1);
+          printf("\nEnter the sl.no to delete from catalogue");
+          scanf("%d",&sln);
+      
+          fp1=fopen(fname,"r");
+          fp2=fopen("temp.txt","w");
+          sl=0;
+          while(fscanf(fp1,"%d %s %d %d\n",&d,a,&b,&c)!=EOF){
+                  if(sln!=d){
+                 sl++;
+                   fprintf(fp2,"%d %s %d %d\n",sl,a,b,c);
+                 }
+                     //printf("%d %s %d %d\n",d,a,b,c);                
+            }
+       
+          fclose(fp1);
+          fclose(fp2);
+          remove(fname);
+          rename("temp.txt",fname);
+          fp1=fopen(fname,"r");
+          while(fscanf(fp1,"\n%d %s %d %d",&d,a,&b,&c)!=EOF){
+               
+                printf("%d %s %d %d\n",d,a,b,c);
+                
+            }
+      fclose(fp1); 
+       printf("\nDo you want to continue deleting in ths catagory [1/0]");
+          scanf("%d",&op1);   
+      }while(op1==1);
+       printf("\nDo you want to continue deleteing the item [1/0]");
+       scanf("%d",&op2);
+    }while(op2==1);
+    printf("\nCHANGES HAS BEEN UPDATED");  
 }
+
+
 
 void restock()
 { int q,r,s,e,p,ch,op1,op2;
